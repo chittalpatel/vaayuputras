@@ -1,0 +1,12 @@
+applications:
+- buildpack: python_buildpack
+  command: gunicorn --env DJANGO_SETTINGS_MODULE=pythondjangoapp.settings.production
+    pythondjangoapp.wsgi -b 0.0.0.0:$PORT
+  domain: null
+  host: null
+  instances: 1
+  memory: 2048MB
+  name: vaayuputras
+  routes:
+  - route: vaayuputras.eu-gb.cf.appdomain.cloud
+  timeout: 180
