@@ -1,0 +1,47 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+
+    <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+        <div class="card card-login" style="height:100%;padding: 15px">
+            <!-----Social Login Box  START----->
+            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            <!-- Social Login Box  END----->
+{% else %}
+            <p>{% blocktrans %}If you have not created an account yet, then please
+            <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+{% endif %}
+<form class="form" method="POST" action="{% url 'account_login' %}" style="min-height: 260px">
+    {% csrf_token %}
+    <p class="description text-center" style="font-weight: bolder">{% blocktrans %}For <a href="{{ signup_url }}">&nbsp;&nbsp;SIGN UP</a>.{% endblocktrans %}</p>
+    <p class="description text-center" style="font-weight: bolder">Or Be Classical</p>
+    <!-----login form START----->
+        <!-----Email and password box START----->
+        <div class="card-body">
+            {{ form.as_p }}
+        </div>
+        <!-- Email and password box end  -->
+    <!-----get started box START----->
+    <div class="footer text-center">
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+                <a class="btn btn-primary btn-link btn-wd btn-lg" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                <button class="btn btn-primary btn-link btn-wd btn-lg" type="submit">Get Started</button>
+    </div>
+    <!-----get started box END----->
+</form>
+    <!-----login form END----->
+    <!-----Login Body END----->
+</div>
+</div>
+{% endblock %}

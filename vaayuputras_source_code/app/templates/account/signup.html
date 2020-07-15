@@ -1,0 +1,99 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+    <div class="col-lg-8 col-md-6 ml-auto mr-auto" style="padding-top: 30px">
+        <div class="card card-login" style="height:100%;width:100%;padding: 15px">
+            <div class="card-header card-header-primary text-center" style="padding: 0px">
+                <h3 class="card-text" style="padding-bottom: 15px">SIGN UP</h3>
+        </div>
+        <!-----sign up form START----->
+        <form class="form" id="signup_form" method="post" action="/userHome" style="min-height: 260px">
+            {% csrf_token %}
+            <p class="description text-center" style="font-weight: bolder">{% blocktrans %}Already have an account? Or For Social login <a href="{{ login_url }}">LOG IN</a>.{% endblocktrans %}</p>
+
+        <div class="card-body" style="padding-top: 0px">
+            <div class="row">
+                <div class="col-md-6">
+                   <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">face</i>
+                        </span>
+                      </div>
+                       <input type="text" name="username" value='{{ username }}' required class="form-control" placeholder="Enter Username" autofocus="autofocus" minlength="1" maxlength="150">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">mail</i>
+                        </span>
+                      </div>
+                       <input type="email" name="email" class="form-control" placeholder="Enter Email" value={{ email }}>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">face</i>
+                        </span>
+                      </div>
+                       <input type="text" name="fname" value='{{ fname }}' required class="form-control" placeholder="Enter First Name" autofocus="autofocus" minlength="1" maxlength="150">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">face</i>
+                        </span>
+                      </div>
+                       <input type="text" name="lname" value='{{ lname }}' required class="form-control" placeholder="Enter Last Name" autofocus="autofocus" minlength="1" maxlength="150">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">lock_outline</i>
+                        </span>
+                      </div>
+                       <input type="password" required name="password1" class="form-control" placeholder="Enter Password">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">lock_outline</i>
+                        </span>
+                      </div>
+                        <input type="password" name="password2" class="form-control" required placeholder="Enter Password Again">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    <div style="display: flex;justify-content: flex-start" class="footer text-center">
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+                    <a  style="padding-left: 50px" class="btn btn-primary btn-link btn-wd btn-lg" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button  class="btn btn-primary btn-wd btn-lg" type="submit">Get Started</button>
+        </div>
+</form>
+        <!-----sign up form END----->
+    </div>
+    </div>
+{% endblock %}

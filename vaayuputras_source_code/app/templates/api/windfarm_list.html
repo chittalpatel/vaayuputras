@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wind Farms List</title>
+    <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- Material Kit CSS -->
+  <link href="https://vaayuputras.imfast.io/material-kit.css" rel="stylesheet" />
+</head>
+<body>
+  <nav id="home" class="navbar fixed-top navbar-expand-lg " >
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="#home"> <big><big>
+          Vaayu Putras </big></big></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="{% url 'home' %}" class="nav-link">
+              <i class="material-icons">home</i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="material-icons">dashboard</i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'setupwindfarm' %}" class="nav-link">
+              <i class="material-icons">toys</i> SetUp Wind Farm
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'contactus' %}" class="nav-link">
+              <i class="material-icons">phone</i> Contact Us
+            </a>
+          </li>
+            <li class="dropdown nav-item">
+              {% if user.is_authenticated %}
+                    <a href="javascript:" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                      <div class="profile-photo-small">
+                          {% if user.socialaccount_set.all.0.get_avatar_url %}
+                              <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Profile Photo" class="rounded-circle img-fluid" style="height: 40px;width: 40px">
+                           {% else %}
+                              <img src="https://vaayuputras.imfast.io/default-propic.jpg" alt="Profile Photo" class="rounded-circle img-fluid" style="height: 40px;width: 40px">
+                          {% endif %}
+                      </div>
+                    <div class="ripple-container"></div></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <h6 class="dropdown-header" style="font-weight: bolder">{{ user.username | upper}}</h6>
+                  {% if request.path != "/userHome" %}
+                      <a href="/userHome" class="dropdown-item">My Account and Settings</a>
+                  {% endif %}
+                  {% if request.path != "/accounts/logout/" %}
+                      <a href="/accounts/logout/" class="dropdown-item">SIGN OUT</a>
+                   {% endif %}
+              {% else %}
+                        <a href="javascript:" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-info btn-sm ">Login/Sign Up</button>
+                    <div class="ripple-container"></div></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+              {% if request.path != "/accounts/login/" %}
+                      <a href="/accounts/login/" class="dropdown-item">LOG IN</a>
+              {% endif %}
+              {% if request.path != "/accounts/signup/" %}
+                      <a href="/accounts/signup/" class="dropdown-item">SIGN UP</a>
+              {% endif %}
+
+              {% endif %}
+                    </div>
+                  </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="section" style="background-color: #ffffff">
+      <div class="container" style="background-color: #ffffff">
+        <h1>Wind Farms in Database</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Wind Farm Name</th>
+        <th>Capacity</th>
+        <th>Place</th>
+        <th>Country</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>No Of Turbines</th>
+    </tr>
+    {% for data in wind_farm_data %}
+        <tr>
+            <td>{{  data.name }}</td>
+            <td>{{  data.capacity }}</td>
+            <td>{{  data.place }}</td>
+            <td>{{  data.country }}</td>
+            <td>{{  data.latitude }}</td>
+            <td>{{  data.longitude }}</td>
+            <td>{{  data.noofturbines }}</td>
+        </tr>
+    {% endfor %}
+</table>
+      </div>
+  </div>
+
+
+
+
+<script src="https://vaayuputras.imfast.io/jquery.min.js" type="text/javascript"></script>
+  <script src="https://vaayuputras.imfast.io/popper.min.js" type="text/javascript"></script>
+  <script src="https://vaayuputras.imfast.io/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="https://vaayuputras.imfast.io/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-flexdatalist@2.2.4/jquery.flexdatalist.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+  <script src="https://vaayuputras.imfast.io/material-kit.js?v=2.0.7" type="text/javascript"></script>
+
+</body>
+</html>
