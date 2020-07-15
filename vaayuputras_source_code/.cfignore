@@ -1,8 +1,0 @@
-.pyc
-.egg-info
-Dockerfile
-Dockerfile-tools
-.dockerignore
-.git/
-.github/
-.gitignore
