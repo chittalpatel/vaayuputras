@@ -24,6 +24,7 @@ Youtube Link : https://www.youtube.com/watch?v=-BYQwZWs6I4&feature=youtu.be
 - Power given to user to Train their own model with their owned wind farm data and use it for prediction.
 - RESTful API Support for Wind Power prediction and Wind Farm Economics calculator for both Auth and Non-Auth Users.
 - Very Powerful IBM Watson Assistant which can perform Wind Power prediction, Do Wind Farm Economics and Chat with Users about Wind Farm Terminologies.
+- Login and Sign Up System with Integrated Google, Facebook and Twitter Sign-In.
 
 ## Site
 
@@ -61,6 +62,7 @@ The Site is packed with numerous services with beautiful UI for complete User ex
 - Watson Assistant
 - IBM Elephant SQL (Postgre SQL) Service (for Database Management)
 - IBM Cloud Foundry (for Deployment)
+- Docker Containerization
 - Google Cloud Maps API
 - Javascript libraries like Jquery, Popper, NoUISlider, Stats, Plotly etc.
 - Weather APIs from OpenWeatherMaps and Climacell.
@@ -75,7 +77,7 @@ All the Data which was gathered from numerous sources and websites is available 
 
 A Kaggle Notebook which was made by Me for Kaggle Dataset Analysis and also received Silver Medal is Available [HERE](https://www.kaggle.com/chittalpatel/wind-turbine-power-analysis)
 
-Other Notebook which contains All the Data Cleaning, Analysis, Machine Learning Experiment and Deep Learning Modelling using LSTM is available in Repo itself.
+Other Notebook which contains All the Data Cleaning, Analysis, Machine Learning Experiment and Deep Learning Modelling using LSTM is available in Repo itself. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1y0-Ei2-2TQaoUGpThIlaWboTtBnYXHXI?usp=sharing) 
 
 ## How to Run the Project Locally
 
