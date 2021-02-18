@@ -1,4 +1,3 @@
-# ![Vaayuputras](https://vaayuputras.imfast.io/vp_home.jpg)
 # Vaayuputras
 <table>
 <tr>
@@ -8,11 +7,11 @@
 </tr>
 </table>
 
-## Website Hosted on IBM Cloud Foundry
+## Website Hosted on IBM Cloud Foundry (Currently Website is down due to the expiry of free tier resources.)
 Here is the working live website :  https://vaayuputras.eu-gb.cf.appdomain.cloud/
 
 ## Video Presentation of Project
-Youtube Link : https://www.youtube.com/watch?v=-BYQwZWs6I4&feature=youtu.be
+Youtube Link : https://www.youtube.com/watch?v=NY4ssdP0uEY&feature=youtu.be
 
 
 ## Features
@@ -31,25 +30,15 @@ Youtube Link : https://www.youtube.com/watch?v=-BYQwZWs6I4&feature=youtu.be
 ### Services
 The Site is packed with numerous services with beautiful UI for complete User experience.
 
-![](https://vaayuputras.imfast.io/vp_feat.jpg)
-
 ### User Authentication System
-![](https://vaayuputras.imfast.io/vp_auth.jpg)
 
 ### Dashboard
-![](https://vaayuputras.imfast.io/vp_dash.jpg)
 
 ### Wind Farm Selection
-![](https://vaayuputras.imfast.io/vp_swf.jpg)
 
 ### Charts
-![](https://vaayuputras.imfast.io/vp_ch1.jpg)
-![](https://vaayuputras.imfast.io/vp_ch2.jpg)
-![](https://vaayuputras.imfast.io/vp_ch3.jpg)
 
 ### Wind Farm Economics Calculator
-![](https://vaayuputras.imfast.io/vp_wfec.jpg)
-
 
 ## Libraries, Frameworks and UI Used
 
@@ -66,9 +55,7 @@ The Site is packed with numerous services with beautiful UI for complete User ex
 - Google Cloud Maps API
 - Javascript libraries like Jquery, Popper, NoUISlider, Stats, Plotly etc.
 - Weather APIs from OpenWeatherMaps and Climacell.
-
-### Static and JS Files
-Static Files, Images and Javascript Files used in project are Hosted [HERE](https://vaayuputras.imfast.io/) as CDN.
+- 
 
 ## Dataset
 All the Data which was gathered from numerous sources and websites is available [HERE](https://drive.google.com/drive/folders/1AybyjROKdkmerQqCffyRwUzvy7KGVWWA?usp=sharing) on Google Drive.
