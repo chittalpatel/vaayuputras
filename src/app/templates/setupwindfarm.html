@@ -1,0 +1,615 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Wind Power</title>
+  <!-----Required meta tags----->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-----Fonts and icons----->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-----Material Kit CSS----->
+  <link href="{% static 'css/material-kit.css' %}" rel="stylesheet" />
+
+    <style>
+        .noUi-tooltip {
+        display: none;
+        }
+        .noUi-active .noUi-tooltip {
+        display: block;
+        }
+        .noUi-horizontal{
+            height:5px;
+            margin: 15px 0;
+        }
+        .noUi-horizontal .noUi-handle {
+	box-sizing: border-box;
+	width: 17px;
+	height: 17px;
+	left: 90%;
+	top: -6px;
+	cursor: pointer;
+	border-radius: 100%;
+	transition: all 0.2s ease-out;
+	border: 1px solid #9c27b0;
+	background: #ffffff;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    }
+        .bmd-form-group .bmd-label-static {
+	top: 0.35rem;
+	left: 0;
+	font-size: 1.050rem;
+    }
+
+    </style>
+</head>
+
+<body class="index-page sidebar-collapse">
+  <!-----header part START----->
+  <nav id="home" class="navbar navbar-color-on-scroll fixed-top navbar-expand-lg navbar-transparent" color-on-scroll="100">
+    <div class="container">
+      <!-----vayuputras heading START----->
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="#home"> <big><big>
+          JETT </big></big></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <!-----vaayuputras heading END----->
+      <!-----five buttons START----->
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <!-----home button START----->
+          <li class="nav-item">
+            <a href="{% url 'home' %}" class="nav-link">
+              <i class="material-icons">home</i> Home
+            </a>
+          </li>
+          <!-----home button END----->
+          <!-----dashboard button START----->
+          <li class="nav-item">
+            <a href="{% url 'dashb' %}" class="nav-link">
+              <i class="material-icons">dashboard</i> Dashboard
+            </a>
+          </li>
+          <!-----dashboard button END----->
+          <!-----setup wind farm button START----->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="material-icons">construction</i> SetUp Wind Farm
+            </a>
+          </li>
+          <!-----setup wind farm button END----->
+          <!-----contact us button START----->
+          <li class="nav-item">
+            <a href="{% url 'contactus' %}" class="nav-link">
+              <i class="material-icons">phone</i> Contact Us
+            </a>
+          </li>
+          <!-----contact us button END----->
+          <!-----Login/Signup or user account button START----->
+          <li class="dropdown nav-item">
+              {% if user.is_authenticated %}
+                    <a href="javascript:" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                      <div class="profile-photo-small">
+                          {% if user.socialaccount_set.all.0.get_avatar_url %}
+                              <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Profile Photo" class="rounded-circle img-fluid" style="height: 40px;width: 40px">
+                           {% else %}
+                              <img src="{% static "images/default-propic.jpg" %}" alt="Profile Photo" class="rounded-circle img-fluid" style="height: 40px;width: 40px">
+                          {% endif %}
+                      </div>
+                    <div class="ripple-container"></div></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <h6 class="dropdown-header" style="font-weight: bolder">{{ user.username | upper}}</h6>
+                  {% if request.path != "/userHome" %}
+                      <a href="/userHome" class="dropdown-item">My Account and Settings</a>
+                  {% endif %}
+                  {% if request.path != "/accounts/logout/" %}
+                      <a href="/accounts/logout/" class="dropdown-item">SIGN OUT</a>
+                   {% endif %}
+              {% else %}
+                        <a href="javascript:" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-info btn-sm ">Login/Sign Up</button>
+                    <div class="ripple-container"></div></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+              {% if request.path != "/accounts/login/" %}
+                      <a href="/accounts/login/" class="dropdown-item">LOG IN</a>
+              {% endif %}
+              {% if request.path != "/accounts/signup/" %}
+                      <a href="/accounts/signup/" class="dropdown-item">SIGN UP</a>
+              {% endif %}
+
+              {% endif %}
+                    </div>
+                  </li>
+          <!----five buttons END----->
+        </ul>
+      </div>
+      <!----five buttons END----->
+    </div>
+  </nav>
+  <!-----header part END----->
+  <!-----background image part START----->
+  <div class="page-header header-filter " data-parallax="true" style="background-image: url('{% static "images/setupwindfarm.jpg" %}'); transform: translate3d(0px, 0px, 0px);">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-10% mr-120%">
+          <div class="brand text-left">
+            <h1 class=" text-left"> Wind Farm </h1>
+            <h2 class="text-left">Utils</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-----background image part END----->
+  <!-----body part START----->
+  <div class="main main-raised">
+    <div class="section">
+      <div class="container">
+        <div class="title">
+          <h2>Wind Farm Economics Calculator</h2>
+        </div>
+        <div class="row">
+                <div class="col-md-2">
+                  <ul class="nav nav-pills nav-pills-icons flex-column" role="tablist">
+                    <!--
+                                        color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                                    -->
+                    <li class="nav-item">
+                      <a class="nav-link active show" href="#overview" role="tab" data-toggle="tab" aria-selected="false">
+                        <i class="material-icons">ballot</i>
+                        Docs
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#calculate" role="tab" data-toggle="tab" aria-selected="true">
+                        <i class="material-icons">calculate</i>
+                        Calculator
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-9">
+                  <div class="tab-content">
+                    <!-----Document part START----->
+                    <div class="tab-pane active show" id="overview">
+                        <div class="title">
+                            <h2>About</h2>
+                        </div>
+                        <div class="row">
+                            <h4><b>Wind Farm Economics Calculator</b> calculates the Annual Energy Production, Costs to Wind Farm like Maintenance and Operation, Cost to generate Power, Total Annual Expense, Gross Annual Income, Net Annual Profit, Return on Investment and Break Even Point. These factors are very important before setting up any Wind Farm. All these factors are calculated from user provided inputs of Fixed Charge Rate, Investment Capital, Installed Capacity, Capacity Factor, Revenue per kWh and Land Lease Cost.</h4>
+                        </div>
+                        <div class="title">
+                            <h2>Input Elements</h2>
+                        </div>
+                        <div class="row">
+                            <h3>Fixed Charge Rate (FCR)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>It’s the fraction of the Total Installed Cost that must be set aside each year to retire capital costs which include interest on debt, return on equity, and so forth. It's usually between 3% to 15%. You can get more information about it <a href="https://www.e-education.psu.edu/eme801/node/560" target="_blank">HERE</a>></h4>
+                        </div>
+                         <div class="row">
+                            <h3>Investment Capital (IC)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>The initial capital investment or Capex is the total cost of the entire installation, which according to AWEA (American Wind Energy Association) is about <b>$1.3 million for a 1-MW (1,000 kW) turbine.</b> You should <b>provide this input after deducting the subsidies received on total installation cost.</b> Usually in every countries, subsidies are provided which varies from country to country.</h4>
+                        </div>
+                        <div class="row">
+                            <h3>Wind Farm Capacity (MW)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>It is the Total Wind Farm Capacity. Sum of all the Wind turbine power rating installed to be installed in Wind Farm.</h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Capacity Factor (CF)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>Capacity factor is the unitless ratio of an actual electrical energy output over a given period of time to the maximum possible electrical energy output over that period. Usually the Capacity Factor of Newly installed Wind Turbine is <b>30% - 40%</b> and it decreases as the Turbines gets old.</h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Revenue per kWh ($/kWh)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>It is the average revenue per kilowatt-hour of electricity purchased by Electricity governing bodies. Wind Farm owners sell their Units produced at this rate. It is decided by the Electricity Governing Body of particular State or Country. It varies highly from country to country and state to state. </h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Land Lease Cost (LLC)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>It is the amount which is payed by the Wind Farm owner If he has leased land from any public or private authorities. It will be zero if Wind Farm owner constructs Wind Farm on his own land. </h4>
+                        </div>
+                        <div class="title">
+                            <h2>Calculated Elements</h2>
+                        </div>
+                        <div class="row">
+                            <h3>Annual Energy Production (AEP)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>Total Energy Produced during a year.<br><b> Formula : total_capacity x 24 x 365 x capacity_factor </b></h4>
+                        </div>
+                        <div class="row">
+                            <h3>Levelized Replacement Cost (LRC)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>Levelized replacement cost is yearly sinking fund for overhauls and replacements.<br><b> Formula : total_cost_of_turbines / expected_life </b>. (We have assumed expected_life of turbine 22.5 years)</h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Operations and Management Cost (LRC)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>Operations and Management cost is the total annual cost of Operating and Maintaining Wind Farm. Operations and Maintenance cost simply runs about 8% of annual gross revenue.<br><b> Formula : average_energy_production x average_revenue x 0.08</b></h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Cost to Generate Power (P<sub>cost to gen</sub>)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>Cost occurred to generate 1 kWh power.<br><b> Formula : [(FCR x IC) / AEP] + [(LRC + O&M + LLC) / AEP ]</b></h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Total Annual Expense (T<sub>ae</sub>)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>Total Expenses occurred during a year.<br><b> Formula :  P<sub>cost to gen</sub>  x annual_energy_production</b></h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Gross Income (I<sub>g</sub>)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>Total Income earned during a year.<br><b> Formula :  revenue_per_kwh  x annual_energy_production</b></h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Annual Profit (P<sub>a</sub>)</h3>
+                        </div>
+                        <div class="row">
+                            <h4>Total profit earned during a year.<br><b> Formula :  (P<sub>selling price</sub> – P<sub>cost to gen</sub> ) x AEP</b></h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Return on Investment (ROI)</h3>
+                        </div>
+                        <div class="row">
+                            <h4> Return on Investment (ROI) is a performance measure used to evaluate the efficiency of an investment or compare the efficiency of a number of different investments.<br><b> Formula :  P<sub>a</sub> / Total investment </b></h4>
+                        </div>
+
+                        <div class="row">
+                            <h3>Break Even Point (BEP)</h3>
+                        </div>
+                        <div class="row">
+                            <h4> The breakeven point is the level of production at which the costs of production equal the revenues for a product.<br><b> Formula :  I<sub>c</sub> / P<sub>a</sub> </b></h4>
+                        </div>
+
+
+                      </div>
+                    <!-----Document part END----->
+                    <!-----economic calculator part START----->
+                    <div class="tab-pane" id="calculate">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="FCR">Fixed Charge Rate (FCR)</label>
+                                    <div id="sliderFCR" class="slider"></div>
+                                    <input id="FCR" type='text' class='form-control'>
+                                    <small id="FCRhelp" class="form-text text-muted">FCR</small>
+                                </div>
+                                <div class="form-group has-info">
+                                    <label for="CAP">Wind Farm Capacity (MW)</label>
+                                    <div id="sliderCAP" class="slider slider-info"></div>
+                                    <input id="CAP" type='text' class='form-control'>
+                                    <small id="CAPhelp" class="form-text text-muted">Capacity in Mega-Watts</small>
+                                </div>
+                                <div class="form-group has-success">
+                                    <label for="REV">Revenue per KWh ($)</label>
+                                    <div id="sliderREV" class="slider slider-success"></div>
+                                    <input id="REV" type='text' class='form-control'>
+                                    <small id="REVhelp" class="form-text text-muted">Revenue per KWh ($ per KWh)</small>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group has-success">
+                                    <label for="IC">Investment Capital (IC)</label>
+                                    <div id="sliderIC" class="slider slider-success"></div>
+                                    <input id="IC" type='text' class='form-control'>
+                                    <small id="IChelp" class="form-text text-muted">IC</small>
+                                </div>
+                                <div class="form-group has-warning">
+                                    <label for="CF">Capacity Factor (CF)</label>
+                                    <div id="sliderCF" class="slider slider-warning"></div>
+                                    <input id="CF" type='text' class='form-control'>
+                                    <small id="CFhelp" class="form-text text-muted">Capacity Factor (in %)</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="LLC">Land Lease Cost (LLC)</label>
+                                    <div id="sliderLLC" class="slider"></div>
+                                    <input id="LLC" type='text' class='form-control'>
+                                    <small id="LLChelp" class="form-text text-muted">Land Lease Cost (in $)</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div><br></div>
+                        <div class="row">
+                            <h3 class="text-warning">Annual Energy Production (AEP) : </h3>&nbsp<h3 id="AEP"></h3>
+                        </div>
+                         <div class="row">
+                            <h3>Levelized Replacement Cost (LRC) : </h3>&nbsp<h3 id="LRC"></h3>
+                        </div>
+                        <div class="row">
+                            <h3>Operations & Management Cost (O&M) : </h3>&nbsp<h3 id="OM"></h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="text-info">Cost to Generate Power (P<sub>cost to gen</sub>) : </h3>&nbsp<h3 id="CGP"></h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="text-danger">Total Annual Expense (T<sub>ae</sub>) : </h3>&nbsp<h3 id="TAE"></h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="text-success">Gross Income (I<sub>g</sub>) : </h3>&nbsp<h3 id="GI"></h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="text-primary">Annual Profit (AP): </h3>&nbsp<h3 id="AP"></h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="text-success">Return on Investment (ROI): </h3>&nbsp<h3 id="ROI"></h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="text-info">Break Even Point (BEP): </h3>&nbsp<h3 id="BEP"></h3>
+                        </div>
+                      </div>
+                    <!-----economic calculator part END----->
+                  </div>
+                </div>
+        </div>
+      </div>
+  </div>
+  </div>
+  <!-----body part END----->
+    <!-----script part START----->
+  <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+  <script src="{% static "js/popper.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/bootstrap-material-design.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/moment.min.js" %}"></script>
+  <script src="{% static "js/bootstrap-datetimepicker.js" %}"></script>
+    <script src="{% static "js/nouislider.min.js" %}"></script>
+  <script src="{% static "js/material-kit.js" %}" type="text/javascript"></script>
+
+
+  <script>
+      var slider1 = document.getElementById('sliderFCR');
+      noUiSlider.create(slider1, {
+      start: 7,
+      connect: [true,false],
+      tooltips: true,
+      range: {
+        'min': 0.5,
+        'max': 80
+      }
+      });
+
+
+    var inputFCR = document.getElementById('FCR');
+
+    inputFCR.addEventListener('mouseout', function () {
+        slider1.noUiSlider.set(this.value.substring(0,this.value.length-2));
+
+    });
+    slider1.noUiSlider.on('update', function (values) {
+
+        inputFCR.value = values+' %';
+        calc();
+    });
+
+
+  </script>
+
+  <script>
+      var slider2 = document.getElementById('sliderIC');
+      noUiSlider.create(slider2, {
+      start: 2.5,
+      connect: [true,false],
+      tooltips: true,
+      range: {
+        'min': 0.1,
+        '25%': 10,
+        '50%': 100,
+        '75%': 500,
+        'max': 10000
+      }
+      });
+
+
+    var inputIC = document.getElementById('IC');
+
+    inputIC.addEventListener('mouseout', function () {
+        slider2.noUiSlider.set(this.value.substring(2,this.value.length-2));
+        calc();
+    });
+
+    slider2.noUiSlider.on('update', function (values) {
+
+        inputIC.value = '$ '+values+ ' M';
+        calc();
+    });
+
+
+
+  </script>
+
+  <script>
+      var slider3 = document.getElementById('sliderCAP');
+      noUiSlider.create(slider3, {
+      start: 2,
+      connect: [true,false],
+      tooltips: true,
+      range: {
+        'min': 0.1,
+        '25%': 1,
+        '50%': 50,
+        '75%': 1000,
+        'max': 22000
+      }
+      });
+
+
+    var inputCAP = document.getElementById('CAP');
+
+    inputCAP.addEventListener('mouseout', function () {
+        slider3.noUiSlider.set(this.value.substring(0,this.value.length-3));
+        calc();
+    });
+    slider3.noUiSlider.on('update', function (values) {
+
+        inputCAP.value = values+' MW';
+        calc();
+    });
+
+  </script>
+
+  <script>
+      var slider4 = document.getElementById('sliderCF');
+      noUiSlider.create(slider4, {
+      start: 40,
+      connect: [true,false],
+      tooltips: true,
+      range: {
+        'min': 5,
+        'max': 80
+      }
+      });
+
+
+    var inputCF = document.getElementById('CF');
+
+    inputCF.addEventListener('mouseout', function () {
+        slider4.noUiSlider.set(this.value.substring(0,this.value.length-2));
+        calc();
+    });
+    slider4.noUiSlider.on('update', function (values) {
+
+        inputCF.value = values+' %';
+        calc();
+
+    });
+
+  </script>
+
+  <script>
+      var slider5 = document.getElementById('sliderREV');
+      noUiSlider.create(slider5, {
+      start: 0.070,
+      connect: [true,false],
+      tooltips: true,
+      range: {
+        'min': 0,
+        '25%': 0.1,
+        '50%': 1,
+        'max': 10
+      }
+      });
+
+    var inputREV = document.getElementById('REV');
+
+    inputREV.addEventListener('mouseout', function () {
+        slider5.noUiSlider.set(this.value.substring(2,this.value.length-5));
+        calc()
+    });
+
+    slider5.noUiSlider.on('update', function (values) {
+
+        inputREV.value = '$ '+values+' /KWh';
+        calc()
+    });
+
+  </script>
+
+  <script>
+      var slider6 = document.getElementById('sliderLLC');
+      noUiSlider.create(slider6, {
+      start: 10000,
+      connect: [true,false],
+      tooltips: true,
+      range: {
+        'min': 0,
+        '25%': 10000,
+        '50%': 50000,
+        '75%': 1000000,
+        'max': 5000000000
+      }
+      });
+
+
+    var inputLLC = document.getElementById('LLC');
+
+    inputLLC.addEventListener('mouseout', function () {
+        slider6.noUiSlider.set(this.value.substring(2));
+        calc()
+    });
+    slider6.noUiSlider.on('update', function (values) {
+
+        inputLLC.value = '$ '+values;
+        calc()
+    });
+
+  </script>
+
+  <script>
+      function calc() {
+          const fcr=parseFloat(inputFCR.value)/100;
+          const ic = parseFloat(inputIC.value.substring(2))*1000000;
+          const cap = parseFloat(inputCAP.value);
+          const cf = parseFloat(inputCF.value);
+          const rev = parseFloat(inputREV.value.substring(2));
+          const llc = parseFloat(inputLLC.value.substring(2));
+          const aep = cap * 1000 * 24 * 365 * cf / 100;
+          const lrc = ic / 22.5;
+          const om = aep * rev * 0.08;
+          const cgp = (fcr * ic / aep) + ((lrc + om + llc) / aep);
+          const tae = cgp * aep;
+          const gi = rev * aep;
+          const ap = (rev - cgp) * aep;
+          const roi = ap * 100 / ic;
+          const bep = ic / ap;
+
+        document.getElementById('AEP').innerHTML=+Math.round(aep)+' kWh';
+        document.getElementById('LRC').innerHTML='$ '+Math.round(lrc)+'/yr';
+        document.getElementById('OM').innerHTML='$ '+Math.round(om)+'/yr';
+        document.getElementById('CGP').innerHTML='$ '+cgp.toFixed(3)+'/kWh';
+        document.getElementById('TAE').innerHTML='<b>$ '+Math.round(tae)+'</b>';
+        document.getElementById('GI').innerHTML='<b>$ '+Math.round(gi)+'</b>';
+        document.getElementById('AP').innerHTML='<b>$ '+Math.round(ap)+'</b>';
+        document.getElementById('ROI').innerHTML='<b>'+roi.toFixed(3)+'%</b>';
+        if(gi>=tae){
+            document.getElementById('ROI').style.color="green";
+            document.getElementById('AP').style.color="green";
+            document.getElementById('BEP').innerHTML=Math.round(bep)+' yrs';
+        }
+        else{
+            document.getElementById('ROI').style.color="red";
+            document.getElementById('AP').style.color="red";
+            document.getElementById('BEP').innerHTML='Infinite yrs';
+        }
+      }
+      calc()
+  </script>
+
+<!-----script part END---->
+</body>
+
+</html>

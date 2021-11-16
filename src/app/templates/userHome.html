@@ -1,0 +1,498 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    My Account
+  </title>
+
+    <!-----Fonts and icons----->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-----CSS Files----->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.7/css/material-kit.css" integrity="sha512-PiSoB32xClutD6+bZ+OMrg9UGJF1pvkgzB40XLw8rK542EU9++JowHR73M7VI0WxtECWKYmVd11ehQ2j08W8cw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+
+    <style>
+        .switch {
+	 cursor: pointer;
+}
+ .switch input {
+	 display: none;
+}
+ .switch input + span {
+	 width: 48px;
+	 height: 28px;
+	 border-radius: 14px;
+	 transition: all 0.3s ease;
+	 display: block;
+	 position: relative;
+	 background: #ff4651;
+	 box-shadow: 0 8px 16px -1px rgba(255, 70, 81, 0.2);
+}
+ .switch input + span:before, .switch input + span:after {
+	 content: "";
+	 display: block;
+	 position: absolute;
+	 transition: all 0.3s ease;
+}
+ .switch input + span:before {
+	 top: 5px;
+	 left: 5px;
+	 width: 18px;
+	 height: 18px;
+	 border-radius: 9px;
+	 border: 5px solid #fff;
+}
+ .switch input + span:after {
+	 top: 5px;
+	 left: 32px;
+	 width: 6px;
+	 height: 18px;
+	 border-radius: 40%;
+	 transform-origin: 50% 50%;
+	 background: #fff;
+	 opacity: 0;
+}
+ .switch input + span:active {
+	 transform: scale(0.92);
+}
+ .switch input:checked + span {
+	 background: #48ea8b;
+	 box-shadow: 0 8px 16px -1px rgba(72, 234, 139, 0.2);
+}
+ .switch input:checked + span:before {
+	 width: 0px;
+	 border-radius: 3px;
+	 margin-left: 27px;
+	 border-width: 3px;
+	 background: #fff;
+}
+ .switch input:checked + span:after {
+	 animation: blobChecked 0.35s linear forwards 0.2s;
+}
+ .switch input:not(:checked) + span:before {
+	 animation: blob 0.85s linear forwards 0.2s;
+}
+ @keyframes blob {
+	 0%, 100% {
+		 transform: scale(1);
+	}
+	 30% {
+		 transform: scale(1.12, 0.94);
+	}
+	 60% {
+		 transform: scale(0.96, 1.06);
+	}
+}
+ @keyframes blobChecked {
+	 0% {
+		 opacity: 1;
+		 transform: scaleX(1);
+	}
+	 30% {
+		 transform: scaleX(1.44);
+	}
+	 70% {
+		 transform: scaleX(1.18);
+	}
+	 50%, 99% {
+		 transform: scaleX(1);
+		 opacity: 1;
+	}
+	 100% {
+		 transform: scaleX(1);
+		 opacity: 0;
+	}
+}
+ html {
+	 -webkit-font-smoothing: antialiased;
+}
+ * {
+	 box-sizing: border-box;
+}
+ *:before, *:after {
+	 box-sizing: border-box;
+}
+    </style>
+
+</head>
+
+<body class="profile-page sidebar-collapse">
+  <!-----header part START----->
+  <nav id="home" class="navbar navbar-color-on-scroll fixed-top navbar-expand-lg navbar-transparent" color-on-scroll="100">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="#home"> <big><big>
+          JETT </big></big></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <!-----five buttons START----->
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <!-----home button START----->
+          <li class="nav-item">
+            <a href="{% url 'home' %}" class="nav-link">
+              <i class="material-icons">home</i> Home
+            </a>
+          </li>
+          <!-----home button END----->
+          <!-----dashboard button START----->
+          <li class="nav-item">
+            <a href="{% url 'dashb' %}" class="nav-link">
+              <i class="material-icons">dashboard</i> Dashboard
+            </a>
+          </li>
+          <!-----dashboard button END----->
+          <!-----setup wind farm button START----->
+          <li class="nav-item">
+            <a href="{% url 'setupwindfarm' %}" class="nav-link">
+              <i class="material-icons">construction</i> SetUp Wind Farm
+            </a>
+          </li>
+          <!-----setup wind farm button END----->
+          <!-----contact us button START----->
+          <li class="nav-item">
+            <a href="{% url 'contactus' %}" class="nav-link">
+              <i class="material-icons">phone</i> Contact Us
+            </a>
+          </li>
+          <!-----contact us button END----->
+          <!-----Login/Signup or user account button START----->
+          <li class="dropdown nav-item">
+                    <a href="javascript:" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                      <div class="profile-photo-small">
+                          {% if user.socialaccount_set.all.0.get_avatar_url %}
+                              <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Profile Photo" class="rounded-circle img-fluid" style="height: 40px;width: 40px">
+                           {% else %}
+                              <img src="{% static "images/default-propic.jpg" %}" alt="Profile Photo" class="rounded-circle img-fluid" style="height: 40px;width: 40px">
+                          {% endif %}
+                      </div>
+                    <div class="ripple-container"></div></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <h6 class="dropdown-header" style="font-weight: bolder">{{ user.username | upper}}</h6>
+                  {% if request.path != "/userHome" %}
+                      <a href="/userHome" class="dropdown-item">My Account and Settings</a>
+                  {% endif %}
+                  {% if request.path != "/accounts/logout/" %}
+                      <a href="/accounts/logout/" class="dropdown-item">SIGN OUT</a>
+                   {% endif %}
+           </li>
+          <!----five buttons END----->
+        </ul>
+      </div>
+      <!----five buttons END----->
+    </div>
+  </nav>
+  <!-----header part END----->
+  <!-----background image part START----->
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('{% static "images/bg6.jpg" %}');"></div>
+  <!-----background image part END----->
+  <!-----body part START----->
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <!-----Pic and name part START----->
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="avatar">
+                {% if user.socialaccount_set.all.0.get_avatar_url %}
+                              <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Profile Photo" class="img-raised rounded-circle img-fluid">
+                           {% else %}
+                              <img src="{% static "images/default-propic.jpg" %}" alt="Profile Photo" class="img-raised rounded-circle img-fluid">
+                          {% endif %}
+              </div>
+              <div class="name">
+                <h3 class="title">{{ user.first_name }} {{ user.last_name }}</h3>
+                <h6>{{ user }}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-----Pic and name part END----->
+        <!-----My account my api part START----->
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile-tabs">
+              <ul class="nav nav-pills-info nav-pills nav-pills-icons justify-content-center" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#account" role="tab" data-toggle="tab">
+                    <i class="material-icons">face</i> My Account
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#apikey" role="tab" data-toggle="tab">
+                    <i class="material-icons">vpn_key</i> My API
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-----My account my api part END----->
+        <!-----My wind farm name START----->
+        <div class="tab-content tab-space">
+          <div class="tab-pane active text-center gallery" id="account">
+            <div class="row">
+              <h3>My Wind Farm</h3>
+              <div style="display: flex; width: 100%;height: 3px;background-color: teal"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align: left">
+                <div class="row">
+                    <h2>{{ user.custom_field.farm_name }}</h2>
+                </div>
+                <div class="row">
+                    <h3>{{ user.custom_field.place }}</h3>
+                </div>
+                <div class="row">
+                    <h3>{{ user.custom_field.country }}</h3>
+                </div>
+                <div class="row">
+                    <h3>Wind Farm Capacity : {{ user.custom_field.capacity }} MW</h3>
+                </div>
+                <div class="row" style="height: 30px"></div>
+                <div class="row" style="justify-content: center">
+                    <div class="col-md-6">
+                    <form id="frmdash" method="get" action="wffromdb#predictions">
+                        {% csrf_token %}
+                        <button id="loadbtn" type="submit" class="btn btn-info btn-round">
+                        <i class="material-icons">dashboard</i> Go to Dashboard
+                        </button>
+                        {% if user.custom_field.custom_model %}
+                        <div class="form-group">
+                        <h5>For Prediction, Use Personal Model?</h5>
+                        <label class="switch">
+                        <input checked="checked" name="custom_model" id="custmod" type="checkbox" value="yes">
+                        <span></span>
+                        </label>
+                        </div>
+                        {% endif %}
+                    </form>
+                    </div>
+                    <div class="col-md-6" >
+                    <form method="get" action="map#mapstart">
+                        {% csrf_token %}
+                    <button type="submit" class="btn btn-rose btn-round">
+                        <i class="material-icons">room</i> Change Wind Farm
+                    </button>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="map" style="height: 100%; margin-top: 20px" ></div>
+                </div>
+            </div>
+          <div style="height: 20px"></div>
+              <div id="models" class="row">
+                  <h3>My Personal Models</h3>
+              </div>
+          <div style="display: flex; width: 100%;height: 3px;background-color: teal"></div>
+              <div class="row">
+                <table class="table table-bordered" style="width: 100%">
+                    <tr>
+                        <th>Model Name</th>
+                        <th>Date Created</th>
+                        <th>Last Updated</th>
+                    </tr>
+                    {% if user.custom_field.custom_model %}
+                    <tr>
+                        <td>{{ model_name }}</td>
+                        <td>{{ date_created }}</td>
+                        <td>{{ date_updated }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn btn-primary btn-round" onclick="window.location.href='gettraindata'">
+                                Train Model
+                                <i class="material-icons">model_training</i>
+                            </button>
+                        </td>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-rose btn-round" onclick="window.location.href='deletemodel#models'">
+                                Delete Model
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td>Nothing to Show</td>
+                        <td>Nothing to Show</td>
+                        <td>Nothing to Show</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-primary btn-round" onclick="window.location.href='gettraindata'">
+                                Train Model
+                                <i class="material-icons">model_training</i>
+                            </button>
+                        </td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+                </table>
+              </div>
+          </div>
+          <div class="tab-pane text-center gallery" id="apikey">
+            <div class="row">
+              <h3>My API Key</h3>
+              <div style="display: flex; width: 100%;height: 3px;background-color: teal"></div>
+            </div>
+              <div class="row" style="height: 20px"></div>
+            <div class="row">
+                    <div class="alert alert-success" style="width: -moz-available">
+                        <div class="container" style="justify-content: center">
+                            <div class="alert-icon">
+                                <i class="material-icons">check</i>
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                            </button>
+                            Greetings! You've unlocked your REST API Key. Click Below to View your API Key
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="justify-content: center">
+                    <button class="btn btn-primary" id="btnapikey" onclick="apiProgressBar()">
+                        View API Key &nbsp
+                        <i class="material-icons" style="font-size: 1.6rem;margin-top: -1.9rem">vpn_key</i>
+                        <div class="ripple-container"></div>
+                    </button>
+                </div>
+                <div class="row" style="justify-content: center">
+                    <div class="progress progress-line-info" id="progressbarContainer">
+                <div class="progress-bar progress-bar-info" role="progressbar"
+                     style="width: 0; height: 5px" id="progressBar">
+                </div>
+                    </div>
+                 <div class="form-group has-success bmd-form-group" style="display: none" id="apikeydiv">
+                <input type="text" class="form-control"
+                       id="apikeytxt" value="{{ api }}"
+                       style="padding-left: 20px"
+                       readonly onclick="changeIcon()">
+                <span class="form-control-feedback">
+                  <i class="material-icons" id="apiicon">content_paste</i>
+                </span>
+                  <small id="apikeyHelp" class="form-text text-muted">Click to Copy on Clipboard</small>
+              </div>
+                </div>
+            <div class="row">
+              <h3>API User Manual</h3>
+              <div style="display: flex; width: 100%;height: 3px;background-color: teal"></div>
+            </div>
+            <div class="row">
+                <h4>How to use API Key :-</h4>
+            </div>
+            <div class="row" style="justify-content: center">
+                <button class="btn btn-rose btn-lg" onclick="window.location.href='api'">
+                    <i class="material-icons">description</i>
+                    View API Docs
+                </button>
+            </div>
+
+          </div>
+        </div>
+        <!-----My wind farm name END----->
+      </div>
+    </div>
+  </div>
+  <!-----body part END----->
+  <!-----script part START----->
+  <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+  <script src="{% static "js/popper.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/bootstrap-material-design.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/moment.min.js" %}"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="{% static "js/material-kit.js" %}" type="text/javascript"></script>
+
+
+
+  <script>
+   function changeIcon() {
+        var copyText = document.getElementById("apikeytxt");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+        document.getElementById('apikeyHelp').innerHTML='Copied!'
+        document.getElementById('apiicon').innerHTML='check';
+        document.getElementById('apikeytxt').addEventListener('blur',function () {
+            document.getElementById('apiicon').innerHTML='content_paste';
+            document.getElementById('apikeyHelp').innerHTML='Click to Copy on Clipboard'
+        })
+   }
+   function apiProgressBar() {
+    var container = $("#progressbarContainer"),
+        progressBar = $("#progressBar"),
+        duration = 100,
+        currentProgess = 0,
+        steps = 0.5;
+    $('#apikeydiv').css('display', 'none');
+    progressBar.attr("aria-valuemax", duration);
+    container.css("display", "block");
+    container.css("width",'100%');
+    container.css("height",'5px');
+    var timer = setInterval(function () {
+        currentProgess += steps;
+        progressBar.css('width', currentProgess.toString()+'%');
+
+        if (currentProgess >= duration) {
+            clearInterval(timer);
+            container.css("display", "none");
+            progressBar.css('width',0);
+            $('#apikeydiv').css('display', 'block');
+            $('#apikeydiv').css('width', '35%');
+            $('#btnapikey').css('display','none');
+        }
+    }, steps);
+}
+  </script>
+
+  <script type="text/javascript">
+      window.onload = function() {
+        L.mapquest.key = '0AD61Q2E83K0BOpX1oI3H5dxWw1a033x';
+        let lat={{ request.user.custom_field.latitude }};
+        let long={{ request.user.custom_field.longitude }};
+        console.log(long,lat)
+        var map = L.mapquest.map('map', {
+          center: [long,lat],
+          layers: L.mapquest.tileLayer('map'),
+          zoom: 9
+        });
+
+        L.mapquest.control().addTo(map);
+      }
+    </script>
+
+
+<script>
+        $(document).ready(function(){
+            $("#frmdash").on("submit", function(){
+                document.getElementById('loadbtn').innerHTML='Loading...'+'<i style=\'display: inline-flex;animation: fa-spin 0.6s infinite steps(10);top: -2px;left: 9px\' class=\'fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom\'></i>';
+                setTimeout(function () {
+                    document.getElementById('loadbtn').innerHTML='<i class="material-icons">dashboard</i>'+'Go to Dashboard';
+                },20000)
+            });//submit
+        });//document ready
+    </script>
+<!-----script part END---->
+</body>
+
+</html>

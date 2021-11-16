@@ -1,0 +1,44 @@
+{% load socialaccount %}
+{% load static %}
+
+{% get_providers as socialaccount_providers %}
+<head>
+   <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Login
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!-----Fonts and icons----->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-----CSS Files----->
+  <link href="{% static 'css/material-kit.css' %}" rel="stylesheet" />
+</head>
+<div class="card-header card-header-primary text-center" style=" padding:10px 0px">
+    <h3 class="card-text">LOG IN</h3>
+        <div class="social-line">
+            {% for provider in socialaccount_providers %}
+                {% if provider.id == "openid" %}
+                    {% for brand in provider.get_brands %}
+                        <li>
+                          <a title="{{brand.name}}"
+                             class="socialaccount_provider {{provider.id}} {{brand.id}}"
+                             href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
+                             >{{brand.name}}</a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+                <a title="{{provider.name}}"  class="btn btn-just-icon btn-link" class="socialaccount_provider {{provider.id}}"
+                     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+                {% if provider.name == 'Facebook' %}
+                   <i class="fa fa-facebook-square"></i>
+                {% elif provider.name == 'Google' %}
+                   <i class="fa fa-google-plus"></i>
+                {% elif provider.name == 'Twitter' %}
+                   <i class="fa fa-twitter"></i>
+                {% endif %}</a>
+            {% endfor %}
+ </div>
+</div>
+
